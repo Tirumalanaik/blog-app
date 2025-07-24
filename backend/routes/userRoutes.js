@@ -11,6 +11,6 @@ const router = express.Router();
 
 router.get('/profile', protect, getUserProfile);
 router.put('/profile', protect, updateUserProfile);
-router.get('/', protect, admin, getAllUsers); // Admin-only route
+router.get('/', protect, admin, getAllUsers); 
 
 module.exports = router;

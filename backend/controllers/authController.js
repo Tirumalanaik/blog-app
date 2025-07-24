@@ -1,4 +1,4 @@
-﻿// controllers/authController.js
+﻿
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
@@ -9,18 +9,19 @@ const generateToken = (user) => {
 };
 
 exports.register = async (req, res) => {
-    const { name, email, password } = req.body;
+    const { name, email, password, role = 'user' } = req.body; 
     try {
         const exist = await User.findOne({ email });
         if (exist) return res.status(400).json({ message: 'Email already exists' });
 
-        const user = await User.create({ name, email, password });
+        const user = await User.create({ name, email, password, role });
         const token = generateToken(user);
         res.status(201).json({ token, user });
     } catch (err) {
         res.status(500).json({ message: 'Register failed', error: err.message });
     }
 };
+
 
 exports.login = async (req, res) => {
     const { email, password } = req.body;

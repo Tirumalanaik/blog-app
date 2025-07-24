@@ -7,7 +7,7 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_API_SECRET
 });
 
-// Optional: Only show in development
+
 if (process.env.NODE_ENV !== 'production') {
     console.log('✅ Cloudinary configured successfully');
 }

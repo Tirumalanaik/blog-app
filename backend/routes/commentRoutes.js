@@ -1,4 +1,4 @@
-// routes/commentRoutes.js
+
 
 const express = require('express');
 const { addComment, deleteComment } = require('../controllers/commentController');

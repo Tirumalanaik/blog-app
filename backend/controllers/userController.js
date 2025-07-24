@@ -2,15 +2,14 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
-// Generate JWT
+
 const generateToken = (user) => {
     return jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, {
         expiresIn: '7d',
     });
 };
 
-// @desc Register new user
-// @route POST /api/users/register
+
 const registerUser = async (req, res) => {
     try {
         const { name, email, password } = req.body;
@@ -35,8 +34,7 @@ const registerUser = async (req, res) => {
     }
 };
 
-// @desc Login user
-// @route POST /api/users/login
+
 const loginUser = async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -61,8 +59,7 @@ const loginUser = async (req, res) => {
     }
 };
 
-// @desc Get user profile
-// @route GET /api/users/profile
+
 const getUserProfile = async (req, res) => {
     try {
         const user = await User.findById(req.user.id).select('-password');
@@ -75,8 +72,7 @@ const getUserProfile = async (req, res) => {
     }
 };
 
-// @desc Update user profile
-// @route PUT /api/users/profile
+
 const updateUserProfile = async (req, res) => {
     try {
         const user = await User.findById(req.user.id);
@@ -105,9 +101,7 @@ const updateUserProfile = async (req, res) => {
     }
 };
 
-// @desc Admin - Get all users
-// @route GET /api/users/
-// @access Admin only
+
 const getAllUsers = async (req, res) => {
     try {
         const users = await User.find().select('-password');
